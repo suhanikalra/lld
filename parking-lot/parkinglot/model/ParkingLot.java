@@ -29,12 +29,12 @@ public class ParkingLot {
 
     public boolean unparkVehicle(Ticket ticket) {
         String spotId= ticket.getParkingSpot().getSpotId();
-        if (spotId == null || spotId.isBlank()) {
+        if (spotId == null || spotId.isBlank() || ticket.getVehicle() == null) {
             return false;
         }
 
         for (ParkingFloor parkingFloor : this.parkingFloors) {
-            if (parkingFloor.unparkVehicle(spotId)) {
+            if (parkingFloor.unparkVehicle(ticket.getVehicle())) {
                 return true;
             }
         }
@@ -44,6 +44,10 @@ public class ParkingLot {
 
 
     public ParkingLot(List<ParkingFloor> parkingFloors) {
+
+        if (parkingFloors == null || parkingFloors.isEmpty()) {
+            throw new IllegalArgumentException("Parking floors cannot be empty");
+        }
         this.parkingFloors = parkingFloors;
     }
 
