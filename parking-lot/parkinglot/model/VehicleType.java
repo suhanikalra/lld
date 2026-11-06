@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.model;
 
 public enum VehicleType {
     CAR,

@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +25,21 @@ public class ParkingLot {
         }
 
         return null;
+    }
+
+    public boolean unparkVehicle(Ticket ticket) {
+        String spotId= ticket.getParkingSpot().getSpotId();
+        if (spotId == null || spotId.isBlank()) {
+            return false;
+        }
+
+        for (ParkingFloor parkingFloor : this.parkingFloors) {
+            if (parkingFloor.unparkVehicle(spotId)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 

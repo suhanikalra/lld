@@ -1,5 +1,5 @@
 
-package parkinglot;
+package parkinglot.model;
 
 import java.time.Duration;
 import java.time.LocalDateTime;

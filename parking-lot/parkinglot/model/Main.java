@@ -1,6 +1,5 @@
-package parkinglot;
+package parkinglot.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Main {

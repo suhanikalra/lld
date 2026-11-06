@@ -1,4 +1,4 @@
-package parkinglot;
+package parkinglot.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
