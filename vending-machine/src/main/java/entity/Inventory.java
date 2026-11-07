@@ -29,7 +29,7 @@ public class Inventory {
     public int getQuantity(Product product) {
         return quantity.getOrDefault(product, 0);
     }
-    public boolean reduceQuantity(Product product) {
+    public synchronized boolean reduceQuantity(Product product) {
         if (isAvailable(product)) {
             quantity.put(product, getQuantity(product) - 1);
             return true;
