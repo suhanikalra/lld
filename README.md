@@ -1,4 +1,4 @@
-LLD Practice 
+LLD  Practice 
 
 1 Easy :
   Parking Lot (Strategy Design Pattern) 
