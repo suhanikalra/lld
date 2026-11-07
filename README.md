@@ -1,3 +1,5 @@
 LLD Practice 
 
-Easy --- Parking Lot (Strategy Design Patttern) 
+1 Easy :
+  Parking Lot (Strategy Design Pattern) 
+  Vending Machine (State Pattern)
