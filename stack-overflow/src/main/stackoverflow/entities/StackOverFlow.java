@@ -1,5 +1,7 @@
 package stackoverflow.entities;
 
+import stackoverflow.observer.Observer;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +19,22 @@ public class StackOverFlow {
     public List<stackoverflow.entities.Question> getQuestions() {
         return questions;
     }
-    public void addAnswer(stackoverflow.entities.Question question, stackoverflow.entities.Answer answer, stackoverflow.entities.User user) {
+    public void addAnswer(Question question, Answer answer, User user) {
         question.addAnswer(answer);
         user.addAnswer(answer);
+
+        for (Observer observer : observers) {
+            observer.onAnswerPosted(question, answer);
+        }
+    }
+    private List<Observer> observers = new ArrayList<>();
+
+    public void registerObserver(Observer observer) {
+        observers.add(observer);
+    }
+
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
     }
 
 }

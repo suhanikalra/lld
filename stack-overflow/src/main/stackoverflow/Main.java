@@ -1,12 +1,11 @@
 package stackoverflow;
 
 import stackoverflow.entities.*;
-import stackoverflow.entities.Answer;
-import stackoverflow.entities.Question;
-import stackoverflow.entities.StackOverFlow;
-import stackoverflow.entities.User;
+import stackoverflow.observer.NotificationService;
+import stackoverflow.service.VotingService;
 
 public class Main {
+
     public static void main(String[] args) {
 
         StackOverFlow stackOverFlow = new StackOverFlow();
@@ -15,34 +14,36 @@ public class Main {
         User suhani = new User("Suhani");
         User vipul = new User("Vipul");
 
-        // Create a question
+        // Register observer
+        NotificationService notificationService = new NotificationService();
+        stackOverFlow.registerObserver(notificationService);
+
+        // Create question
         Question question = new Question(
                 "What is Java?",
-                "Can someone explain Java and its main features?",
+                "Can someone explain Java?",
                 suhani
         );
 
-        // Add question
         stackOverFlow.addQuestion(question);
 
-        // Create an answer
+        // Create answer
         Answer answer = new Answer(
                 "Java is an object-oriented programming language.",
                 vipul
         );
 
-        // Add answer
+        // Post answer - should trigger notification
         stackOverFlow.addAnswer(question, answer, vipul);
 
-        // Display question
-        for (Question q : stackOverFlow.getQuestions()) {
-            System.out.println("Question: " + q.getTitle());
-            System.out.println("Asked by: " + q.getAuthor().getUserName());
+        // Test voting
+        VotingService votingService = new VotingService();
+        votingService.vote(answer, suhani);
 
-            for (Answer a : q.getAnswers()) {
-                System.out.println("Answer: " + a.getContent());
-                System.out.println("Answered by: " + a.getAuthor().getUserName());
-            }
-        }
+        // Print results
+        System.out.println("Question count: " + stackOverFlow.getQuestions().size());
+        System.out.println("Answer count: " + question.getAnswers().size());
+        System.out.println("Answer author: " + answer.getAuthor().getUserName());
+        System.out.println("Vipul's reputation: " + vipul.getReputation());
     }
 }
